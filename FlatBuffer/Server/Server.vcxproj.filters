@@ -30,6 +30,12 @@
     <ClCompile Include="pch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Session.cpp">
+      <Filter>Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatServer.cpp">
+      <Filter>Chat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -40,6 +46,15 @@
     </ClInclude>
     <ClInclude Include="..\Libs\include\Message.h">
       <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatRoom.h">
+      <Filter>Chat</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.h">
+      <Filter>Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatServer.h">
+      <Filter>Chat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
