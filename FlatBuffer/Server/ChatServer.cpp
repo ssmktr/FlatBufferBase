@@ -90,7 +90,63 @@ void ChatServer::ProcessPacket(std::shared_ptr<Session> pSession, const uint8_t*
 			std::cout << "클라이언트 로그인 성공 Name : " << pSession->GetName() << std::endl;
 		}
 			break;
+
+		case fbs::Packet_C2S_ENTER_REQ:
+		{
+			m_ChatRoom.Enter(pSession);
+
+			flatbuffers::FlatBufferBuilder builder;
+
+			auto name = builder.CreateString(pSession->GetName());
+			auto data = fbs::CreateS2C_ENTER_RES(builder, name);
+			auto packet = fbs::CreateRoot(builder, fbs::Packet_S2C_ENTER_RES, data.Union());
+
+			builder.Finish(packet);
+
+			m_ChatRoom.Write(CMessage(builder.GetBufferPointer(), builder.GetSize()));
 		}
+			break;
+
+		case fbs::Packet_C2S_LEAVE_REQ:
+		{
+			m_ChatRoom.Leave(pSession);
+
+			flatbuffers::FlatBufferBuilder builder;
+
+			auto name = builder.CreateString(pSession->GetName());
+			auto data = fbs::CreateS2C_LEAVE_RES(builder, name);
+			auto packet = fbs::CreateRoot(builder, fbs::Packet_S2C_LEAVE_RES, data.Union());
+
+			builder.Finish(packet);
+
+			m_ChatRoom.Write(CMessage(builder.GetBufferPointer(), builder.GetSize()));
+		}
+			break;
+
+		case fbs::Packet_C2S_CHAT_REQ:
+		{
+			auto raw = static_cast<const fbs::C2S_CHAT_REQ*>(root->packet());
+
+			flatbuffers::FlatBufferBuilder builder;
+
+			auto name = builder.CreateString(pSession->GetName());
+			auto msg = builder.CreateString(raw->message()->c_str());
+
+			auto data = fbs::CreateS2C_CHAT_RES(builder, name, msg);
+			auto packet = fbs::CreateRoot(builder, fbs::Packet_S2C_CHAT_RES, data.Union());
+
+			builder.Finish(packet);
+
+			std::cout << pSession->GetName() << " : " << raw->message()->c_str() << std::endl;
+
+			m_ChatRoom.Write(CMessage(builder.GetBufferPointer(), builder.GetSize()));
+		}
+			break;
+		}
+	}
+	else
+	{
+		throw std::runtime_error("|||-formed message");
 	}
 }
 
