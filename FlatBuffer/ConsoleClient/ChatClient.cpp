@@ -102,7 +102,7 @@ void ChatClient::handle_read_body()
 		{
 			if (!error)
 			{
-				ProcessPacket(m_ReadMessage.data(), m_ReadMessage.body_length());
+				ProcessPacket(m_ReadMessage.body(), m_ReadMessage.body_length());
 
 				handle_read_header();
 			}

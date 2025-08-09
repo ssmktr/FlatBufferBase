@@ -68,7 +68,7 @@ void Session::handle_read_header()
 void Session::handle_read_body()
 {
 	auto self(shared_from_this());
-	boost::asio::async_read(m_Socket, boost::asio::buffer(m_ReadMessage.data(), m_ReadMessage.body_length()),
+	boost::asio::async_read(m_Socket, boost::asio::buffer(m_ReadMessage.body(), m_ReadMessage.body_length()),
 		[this, self](boost::system::error_code error, std::size_t)
 		{
 			if (!error)
