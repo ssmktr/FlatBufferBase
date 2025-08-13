@@ -1,0 +1,58 @@
+namespace fbs;
+
+union Packet {              // Packet ID
+    C2S_CONNECT_REQ,
+    S2C_CONNECT_RES,
+    C2S_ENTER_REQ,
+    S2C_ENTER_RES,
+    C2S_USERLIST_REQ,
+    S2C_USERLIST_RES,
+    C2S_LEAVE_REQ,
+    S2C_LEAVE_RES,
+    C2S_CHAT_REQ,
+    S2C_CHAT_RES
+}
+
+table C2S_CONNECT_REQ {     // 접속 요청
+    name:string;
+}
+
+table S2C_CONNECT_RES {     // 접속 응답
+    b_success:bool;
+}
+
+table C2S_ENTER_REQ {       // 방 접속 요청
+}
+
+table S2C_ENTER_RES {       // 채팅방에 접속자 정보 전달 "xx님이 입장하였습니다."
+    name:string;
+}
+
+table C2S_USERLIST_REQ {    // 방 유저 리스트 요청
+}
+
+table S2C_USERLIST_RES {    // 유저 리스트 응답 전송
+    name:[string];
+}
+
+table C2S_LEAVE_REQ {       // 방 퇴장 요청
+}
+
+table S2C_LEAVE_RES {       // 채팅방에 탈퇴자 정보 전달 "xx님이 퇴장하였습니다."
+    name:string;
+}
+
+table C2S_CHAT_REQ {        // 채팅 요청 (클라이언트의 채팅을 서버에 전송)
+    message:string;
+}
+
+table S2C_CHAT_RES {        // 채팅 응답 (모든 접속자에게 채팅 메시지 전송)
+    name:string;
+    message:string;
+}
+
+table Root {                // 최상위 Root 테이블 (본 테이블을 활용하여 패킷의 식별을 가능하게 한다)
+    packet:Packet;
+}
+
+root_type Root;
