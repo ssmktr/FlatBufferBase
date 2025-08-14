@@ -46,5 +46,6 @@
 packages/
 
 Server/x64/
+Server/packages.config
 
 ConsoleClient/x64/
