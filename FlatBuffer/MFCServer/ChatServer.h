@@ -1,4 +1,5 @@
 #pragma once
+#include "pch.h"
 #include <set>
 
 class CSession;
@@ -24,7 +25,7 @@ private:
 	boost::asio::io_context m_IoContext;
 	boost::asio::ip::tcp::acceptor m_Acceptor;
 
-	boost::shared_ptr<boost::asio::io_service::work> async_work;
+	boost::asio::executor_work_guard<boost::asio::io_context::executor_type> async_work;
 	boost::thread_group async_thread;
 
 

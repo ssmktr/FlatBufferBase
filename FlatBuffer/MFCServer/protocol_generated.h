@@ -6,6 +6,13 @@
 
 #include "flatbuffers/flatbuffers.h"
 
+// Ensure the included flatbuffers.h is the same version as when this file was
+// generated, otherwise it may not be compatible.
+static_assert(FLATBUFFERS_VERSION_MAJOR == 25 &&
+              FLATBUFFERS_VERSION_MINOR == 2 &&
+              FLATBUFFERS_VERSION_REVISION == 10,
+             "Non-compatible flatbuffers version included");
+
 namespace fbs {
 
 struct C2S_CONNECT_REQ;
@@ -93,7 +100,7 @@ inline const char * const *EnumNamesPacket() {
 }
 
 inline const char *EnumNamePacket(Packet e) {
-  if (flatbuffers::IsOutRange(e, Packet_NONE, Packet_S2C_CHAT_RES)) return "";
+  if (::flatbuffers::IsOutRange(e, Packet_NONE, Packet_S2C_CHAT_RES)) return "";
   const size_t index = static_cast<size_t>(e);
   return EnumNamesPacket()[index];
 }
@@ -142,18 +149,18 @@ template<> struct PacketTraits<fbs::S2C_CHAT_RES> {
   static const Packet enum_value = Packet_S2C_CHAT_RES;
 };
 
-bool VerifyPacket(flatbuffers::Verifier &verifier, const void *obj, Packet type);
-bool VerifyPacketVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types);
+bool VerifyPacket(::flatbuffers::Verifier &verifier, const void *obj, Packet type);
+bool VerifyPacketVector(::flatbuffers::Verifier &verifier, const ::flatbuffers::Vector<::flatbuffers::Offset<void>> *values, const ::flatbuffers::Vector<uint8_t> *types);
 
-struct C2S_CONNECT_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct C2S_CONNECT_REQ FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef C2S_CONNECT_REQBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4
   };
-  const flatbuffers::String *name() const {
-    return GetPointer<const flatbuffers::String *>(VT_NAME);
+  const ::flatbuffers::String *name() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_NAME);
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
@@ -163,32 +170,32 @@ struct C2S_CONNECT_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct C2S_CONNECT_REQBuilder {
   typedef C2S_CONNECT_REQ Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  void add_name(flatbuffers::Offset<flatbuffers::String> name) {
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_name(::flatbuffers::Offset<::flatbuffers::String> name) {
     fbb_.AddOffset(C2S_CONNECT_REQ::VT_NAME, name);
   }
-  explicit C2S_CONNECT_REQBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit C2S_CONNECT_REQBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<C2S_CONNECT_REQ> Finish() {
+  ::flatbuffers::Offset<C2S_CONNECT_REQ> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<C2S_CONNECT_REQ>(end);
+    auto o = ::flatbuffers::Offset<C2S_CONNECT_REQ>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<C2S_CONNECT_REQ> CreateC2S_CONNECT_REQ(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::String> name = 0) {
+inline ::flatbuffers::Offset<C2S_CONNECT_REQ> CreateC2S_CONNECT_REQ(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::String> name = 0) {
   C2S_CONNECT_REQBuilder builder_(_fbb);
   builder_.add_name(name);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<C2S_CONNECT_REQ> CreateC2S_CONNECT_REQDirect(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<C2S_CONNECT_REQ> CreateC2S_CONNECT_REQDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     const char *name = nullptr) {
   auto name__ = name ? _fbb.CreateString(name) : 0;
   return fbs::CreateC2S_CONNECT_REQ(
@@ -196,7 +203,7 @@ inline flatbuffers::Offset<C2S_CONNECT_REQ> CreateC2S_CONNECT_REQDirect(
       name__);
 }
 
-struct S2C_CONNECT_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct S2C_CONNECT_RES FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef S2C_CONNECT_RESBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_B_SUCCESS = 4
@@ -204,42 +211,42 @@ struct S2C_CONNECT_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   bool b_success() const {
     return GetField<uint8_t>(VT_B_SUCCESS, 0) != 0;
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<uint8_t>(verifier, VT_B_SUCCESS) &&
+           VerifyField<uint8_t>(verifier, VT_B_SUCCESS, 1) &&
            verifier.EndTable();
   }
 };
 
 struct S2C_CONNECT_RESBuilder {
   typedef S2C_CONNECT_RES Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
   void add_b_success(bool b_success) {
     fbb_.AddElement<uint8_t>(S2C_CONNECT_RES::VT_B_SUCCESS, static_cast<uint8_t>(b_success), 0);
   }
-  explicit S2C_CONNECT_RESBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit S2C_CONNECT_RESBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<S2C_CONNECT_RES> Finish() {
+  ::flatbuffers::Offset<S2C_CONNECT_RES> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<S2C_CONNECT_RES>(end);
+    auto o = ::flatbuffers::Offset<S2C_CONNECT_RES>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<S2C_CONNECT_RES> CreateS2C_CONNECT_RES(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<S2C_CONNECT_RES> CreateS2C_CONNECT_RES(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     bool b_success = false) {
   S2C_CONNECT_RESBuilder builder_(_fbb);
   builder_.add_b_success(b_success);
   return builder_.Finish();
 }
 
-struct C2S_ENTER_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct C2S_ENTER_REQ FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef C2S_ENTER_REQBuilder Builder;
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            verifier.EndTable();
   }
@@ -247,34 +254,34 @@ struct C2S_ENTER_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct C2S_ENTER_REQBuilder {
   typedef C2S_ENTER_REQ Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  explicit C2S_ENTER_REQBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  explicit C2S_ENTER_REQBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<C2S_ENTER_REQ> Finish() {
+  ::flatbuffers::Offset<C2S_ENTER_REQ> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<C2S_ENTER_REQ>(end);
+    auto o = ::flatbuffers::Offset<C2S_ENTER_REQ>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<C2S_ENTER_REQ> CreateC2S_ENTER_REQ(
-    flatbuffers::FlatBufferBuilder &_fbb) {
+inline ::flatbuffers::Offset<C2S_ENTER_REQ> CreateC2S_ENTER_REQ(
+    ::flatbuffers::FlatBufferBuilder &_fbb) {
   C2S_ENTER_REQBuilder builder_(_fbb);
   return builder_.Finish();
 }
 
-struct S2C_ENTER_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct S2C_ENTER_RES FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef S2C_ENTER_RESBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4
   };
-  const flatbuffers::String *name() const {
-    return GetPointer<const flatbuffers::String *>(VT_NAME);
+  const ::flatbuffers::String *name() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_NAME);
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
@@ -284,32 +291,32 @@ struct S2C_ENTER_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct S2C_ENTER_RESBuilder {
   typedef S2C_ENTER_RES Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  void add_name(flatbuffers::Offset<flatbuffers::String> name) {
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_name(::flatbuffers::Offset<::flatbuffers::String> name) {
     fbb_.AddOffset(S2C_ENTER_RES::VT_NAME, name);
   }
-  explicit S2C_ENTER_RESBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit S2C_ENTER_RESBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<S2C_ENTER_RES> Finish() {
+  ::flatbuffers::Offset<S2C_ENTER_RES> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<S2C_ENTER_RES>(end);
+    auto o = ::flatbuffers::Offset<S2C_ENTER_RES>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<S2C_ENTER_RES> CreateS2C_ENTER_RES(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::String> name = 0) {
+inline ::flatbuffers::Offset<S2C_ENTER_RES> CreateS2C_ENTER_RES(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::String> name = 0) {
   S2C_ENTER_RESBuilder builder_(_fbb);
   builder_.add_name(name);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<S2C_ENTER_RES> CreateS2C_ENTER_RESDirect(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<S2C_ENTER_RES> CreateS2C_ENTER_RESDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     const char *name = nullptr) {
   auto name__ = name ? _fbb.CreateString(name) : 0;
   return fbs::CreateS2C_ENTER_RES(
@@ -317,9 +324,9 @@ inline flatbuffers::Offset<S2C_ENTER_RES> CreateS2C_ENTER_RESDirect(
       name__);
 }
 
-struct C2S_USERLIST_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct C2S_USERLIST_REQ FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef C2S_USERLIST_REQBuilder Builder;
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            verifier.EndTable();
   }
@@ -327,34 +334,34 @@ struct C2S_USERLIST_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct C2S_USERLIST_REQBuilder {
   typedef C2S_USERLIST_REQ Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  explicit C2S_USERLIST_REQBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  explicit C2S_USERLIST_REQBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<C2S_USERLIST_REQ> Finish() {
+  ::flatbuffers::Offset<C2S_USERLIST_REQ> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<C2S_USERLIST_REQ>(end);
+    auto o = ::flatbuffers::Offset<C2S_USERLIST_REQ>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<C2S_USERLIST_REQ> CreateC2S_USERLIST_REQ(
-    flatbuffers::FlatBufferBuilder &_fbb) {
+inline ::flatbuffers::Offset<C2S_USERLIST_REQ> CreateC2S_USERLIST_REQ(
+    ::flatbuffers::FlatBufferBuilder &_fbb) {
   C2S_USERLIST_REQBuilder builder_(_fbb);
   return builder_.Finish();
 }
 
-struct S2C_USERLIST_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct S2C_USERLIST_RES FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef S2C_USERLIST_RESBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4
   };
-  const flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>> *name() const {
-    return GetPointer<const flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>> *>(VT_NAME);
+  const ::flatbuffers::Vector<::flatbuffers::Offset<::flatbuffers::String>> *name() const {
+    return GetPointer<const ::flatbuffers::Vector<::flatbuffers::Offset<::flatbuffers::String>> *>(VT_NAME);
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyVector(name()) &&
@@ -365,42 +372,42 @@ struct S2C_USERLIST_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct S2C_USERLIST_RESBuilder {
   typedef S2C_USERLIST_RES Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  void add_name(flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>>> name) {
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_name(::flatbuffers::Offset<::flatbuffers::Vector<::flatbuffers::Offset<::flatbuffers::String>>> name) {
     fbb_.AddOffset(S2C_USERLIST_RES::VT_NAME, name);
   }
-  explicit S2C_USERLIST_RESBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit S2C_USERLIST_RESBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<S2C_USERLIST_RES> Finish() {
+  ::flatbuffers::Offset<S2C_USERLIST_RES> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<S2C_USERLIST_RES>(end);
+    auto o = ::flatbuffers::Offset<S2C_USERLIST_RES>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<S2C_USERLIST_RES> CreateS2C_USERLIST_RES(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::Vector<flatbuffers::Offset<flatbuffers::String>>> name = 0) {
+inline ::flatbuffers::Offset<S2C_USERLIST_RES> CreateS2C_USERLIST_RES(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::Vector<::flatbuffers::Offset<::flatbuffers::String>>> name = 0) {
   S2C_USERLIST_RESBuilder builder_(_fbb);
   builder_.add_name(name);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<S2C_USERLIST_RES> CreateS2C_USERLIST_RESDirect(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    const std::vector<flatbuffers::Offset<flatbuffers::String>> *name = nullptr) {
-  auto name__ = name ? _fbb.CreateVector<flatbuffers::Offset<flatbuffers::String>>(*name) : 0;
+inline ::flatbuffers::Offset<S2C_USERLIST_RES> CreateS2C_USERLIST_RESDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    const std::vector<::flatbuffers::Offset<::flatbuffers::String>> *name = nullptr) {
+  auto name__ = name ? _fbb.CreateVector<::flatbuffers::Offset<::flatbuffers::String>>(*name) : 0;
   return fbs::CreateS2C_USERLIST_RES(
       _fbb,
       name__);
 }
 
-struct C2S_LEAVE_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct C2S_LEAVE_REQ FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef C2S_LEAVE_REQBuilder Builder;
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            verifier.EndTable();
   }
@@ -408,34 +415,34 @@ struct C2S_LEAVE_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct C2S_LEAVE_REQBuilder {
   typedef C2S_LEAVE_REQ Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  explicit C2S_LEAVE_REQBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  explicit C2S_LEAVE_REQBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<C2S_LEAVE_REQ> Finish() {
+  ::flatbuffers::Offset<C2S_LEAVE_REQ> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<C2S_LEAVE_REQ>(end);
+    auto o = ::flatbuffers::Offset<C2S_LEAVE_REQ>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<C2S_LEAVE_REQ> CreateC2S_LEAVE_REQ(
-    flatbuffers::FlatBufferBuilder &_fbb) {
+inline ::flatbuffers::Offset<C2S_LEAVE_REQ> CreateC2S_LEAVE_REQ(
+    ::flatbuffers::FlatBufferBuilder &_fbb) {
   C2S_LEAVE_REQBuilder builder_(_fbb);
   return builder_.Finish();
 }
 
-struct S2C_LEAVE_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct S2C_LEAVE_RES FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef S2C_LEAVE_RESBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4
   };
-  const flatbuffers::String *name() const {
-    return GetPointer<const flatbuffers::String *>(VT_NAME);
+  const ::flatbuffers::String *name() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_NAME);
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
@@ -445,32 +452,32 @@ struct S2C_LEAVE_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct S2C_LEAVE_RESBuilder {
   typedef S2C_LEAVE_RES Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  void add_name(flatbuffers::Offset<flatbuffers::String> name) {
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_name(::flatbuffers::Offset<::flatbuffers::String> name) {
     fbb_.AddOffset(S2C_LEAVE_RES::VT_NAME, name);
   }
-  explicit S2C_LEAVE_RESBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit S2C_LEAVE_RESBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<S2C_LEAVE_RES> Finish() {
+  ::flatbuffers::Offset<S2C_LEAVE_RES> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<S2C_LEAVE_RES>(end);
+    auto o = ::flatbuffers::Offset<S2C_LEAVE_RES>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<S2C_LEAVE_RES> CreateS2C_LEAVE_RES(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::String> name = 0) {
+inline ::flatbuffers::Offset<S2C_LEAVE_RES> CreateS2C_LEAVE_RES(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::String> name = 0) {
   S2C_LEAVE_RESBuilder builder_(_fbb);
   builder_.add_name(name);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<S2C_LEAVE_RES> CreateS2C_LEAVE_RESDirect(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<S2C_LEAVE_RES> CreateS2C_LEAVE_RESDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     const char *name = nullptr) {
   auto name__ = name ? _fbb.CreateString(name) : 0;
   return fbs::CreateS2C_LEAVE_RES(
@@ -478,15 +485,15 @@ inline flatbuffers::Offset<S2C_LEAVE_RES> CreateS2C_LEAVE_RESDirect(
       name__);
 }
 
-struct C2S_CHAT_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct C2S_CHAT_REQ FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef C2S_CHAT_REQBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_MESSAGE = 4
   };
-  const flatbuffers::String *message() const {
-    return GetPointer<const flatbuffers::String *>(VT_MESSAGE);
+  const ::flatbuffers::String *message() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_MESSAGE);
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_MESSAGE) &&
            verifier.VerifyString(message()) &&
@@ -496,32 +503,32 @@ struct C2S_CHAT_REQ FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct C2S_CHAT_REQBuilder {
   typedef C2S_CHAT_REQ Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  void add_message(flatbuffers::Offset<flatbuffers::String> message) {
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_message(::flatbuffers::Offset<::flatbuffers::String> message) {
     fbb_.AddOffset(C2S_CHAT_REQ::VT_MESSAGE, message);
   }
-  explicit C2S_CHAT_REQBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit C2S_CHAT_REQBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<C2S_CHAT_REQ> Finish() {
+  ::flatbuffers::Offset<C2S_CHAT_REQ> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<C2S_CHAT_REQ>(end);
+    auto o = ::flatbuffers::Offset<C2S_CHAT_REQ>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<C2S_CHAT_REQ> CreateC2S_CHAT_REQ(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::String> message = 0) {
+inline ::flatbuffers::Offset<C2S_CHAT_REQ> CreateC2S_CHAT_REQ(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::String> message = 0) {
   C2S_CHAT_REQBuilder builder_(_fbb);
   builder_.add_message(message);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<C2S_CHAT_REQ> CreateC2S_CHAT_REQDirect(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<C2S_CHAT_REQ> CreateC2S_CHAT_REQDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     const char *message = nullptr) {
   auto message__ = message ? _fbb.CreateString(message) : 0;
   return fbs::CreateC2S_CHAT_REQ(
@@ -529,19 +536,19 @@ inline flatbuffers::Offset<C2S_CHAT_REQ> CreateC2S_CHAT_REQDirect(
       message__);
 }
 
-struct S2C_CHAT_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct S2C_CHAT_RES FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef S2C_CHAT_RESBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_NAME = 4,
     VT_MESSAGE = 6
   };
-  const flatbuffers::String *name() const {
-    return GetPointer<const flatbuffers::String *>(VT_NAME);
+  const ::flatbuffers::String *name() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_NAME);
   }
-  const flatbuffers::String *message() const {
-    return GetPointer<const flatbuffers::String *>(VT_MESSAGE);
+  const ::flatbuffers::String *message() const {
+    return GetPointer<const ::flatbuffers::String *>(VT_MESSAGE);
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
            VerifyOffset(verifier, VT_NAME) &&
            verifier.VerifyString(name()) &&
@@ -553,37 +560,37 @@ struct S2C_CHAT_RES FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
 
 struct S2C_CHAT_RESBuilder {
   typedef S2C_CHAT_RES Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
-  void add_name(flatbuffers::Offset<flatbuffers::String> name) {
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
+  void add_name(::flatbuffers::Offset<::flatbuffers::String> name) {
     fbb_.AddOffset(S2C_CHAT_RES::VT_NAME, name);
   }
-  void add_message(flatbuffers::Offset<flatbuffers::String> message) {
+  void add_message(::flatbuffers::Offset<::flatbuffers::String> message) {
     fbb_.AddOffset(S2C_CHAT_RES::VT_MESSAGE, message);
   }
-  explicit S2C_CHAT_RESBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit S2C_CHAT_RESBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<S2C_CHAT_RES> Finish() {
+  ::flatbuffers::Offset<S2C_CHAT_RES> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<S2C_CHAT_RES>(end);
+    auto o = ::flatbuffers::Offset<S2C_CHAT_RES>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<S2C_CHAT_RES> CreateS2C_CHAT_RES(
-    flatbuffers::FlatBufferBuilder &_fbb,
-    flatbuffers::Offset<flatbuffers::String> name = 0,
-    flatbuffers::Offset<flatbuffers::String> message = 0) {
+inline ::flatbuffers::Offset<S2C_CHAT_RES> CreateS2C_CHAT_RES(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
+    ::flatbuffers::Offset<::flatbuffers::String> name = 0,
+    ::flatbuffers::Offset<::flatbuffers::String> message = 0) {
   S2C_CHAT_RESBuilder builder_(_fbb);
   builder_.add_message(message);
   builder_.add_name(name);
   return builder_.Finish();
 }
 
-inline flatbuffers::Offset<S2C_CHAT_RES> CreateS2C_CHAT_RESDirect(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<S2C_CHAT_RES> CreateS2C_CHAT_RESDirect(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     const char *name = nullptr,
     const char *message = nullptr) {
   auto name__ = name ? _fbb.CreateString(name) : 0;
@@ -594,7 +601,7 @@ inline flatbuffers::Offset<S2C_CHAT_RES> CreateS2C_CHAT_RESDirect(
       message__);
 }
 
-struct Root FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
+struct Root FLATBUFFERS_FINAL_CLASS : private ::flatbuffers::Table {
   typedef RootBuilder Builder;
   enum FlatBuffersVTableOffset FLATBUFFERS_VTABLE_UNDERLYING_TYPE {
     VT_PACKET_TYPE = 4,
@@ -637,9 +644,9 @@ struct Root FLATBUFFERS_FINAL_CLASS : private flatbuffers::Table {
   const fbs::S2C_CHAT_RES *packet_as_S2C_CHAT_RES() const {
     return packet_type() == fbs::Packet_S2C_CHAT_RES ? static_cast<const fbs::S2C_CHAT_RES *>(packet()) : nullptr;
   }
-  bool Verify(flatbuffers::Verifier &verifier) const {
+  bool Verify(::flatbuffers::Verifier &verifier) const {
     return VerifyTableStart(verifier) &&
-           VerifyField<uint8_t>(verifier, VT_PACKET_TYPE) &&
+           VerifyField<uint8_t>(verifier, VT_PACKET_TYPE, 1) &&
            VerifyOffset(verifier, VT_PACKET) &&
            VerifyPacket(verifier, packet(), packet_type()) &&
            verifier.EndTable();
@@ -688,36 +695,36 @@ template<> inline const fbs::S2C_CHAT_RES *Root::packet_as<fbs::S2C_CHAT_RES>() 
 
 struct RootBuilder {
   typedef Root Table;
-  flatbuffers::FlatBufferBuilder &fbb_;
-  flatbuffers::uoffset_t start_;
+  ::flatbuffers::FlatBufferBuilder &fbb_;
+  ::flatbuffers::uoffset_t start_;
   void add_packet_type(fbs::Packet packet_type) {
     fbb_.AddElement<uint8_t>(Root::VT_PACKET_TYPE, static_cast<uint8_t>(packet_type), 0);
   }
-  void add_packet(flatbuffers::Offset<void> packet) {
+  void add_packet(::flatbuffers::Offset<void> packet) {
     fbb_.AddOffset(Root::VT_PACKET, packet);
   }
-  explicit RootBuilder(flatbuffers::FlatBufferBuilder &_fbb)
+  explicit RootBuilder(::flatbuffers::FlatBufferBuilder &_fbb)
         : fbb_(_fbb) {
     start_ = fbb_.StartTable();
   }
-  flatbuffers::Offset<Root> Finish() {
+  ::flatbuffers::Offset<Root> Finish() {
     const auto end = fbb_.EndTable(start_);
-    auto o = flatbuffers::Offset<Root>(end);
+    auto o = ::flatbuffers::Offset<Root>(end);
     return o;
   }
 };
 
-inline flatbuffers::Offset<Root> CreateRoot(
-    flatbuffers::FlatBufferBuilder &_fbb,
+inline ::flatbuffers::Offset<Root> CreateRoot(
+    ::flatbuffers::FlatBufferBuilder &_fbb,
     fbs::Packet packet_type = fbs::Packet_NONE,
-    flatbuffers::Offset<void> packet = 0) {
+    ::flatbuffers::Offset<void> packet = 0) {
   RootBuilder builder_(_fbb);
   builder_.add_packet(packet);
   builder_.add_packet_type(packet_type);
   return builder_.Finish();
 }
 
-inline bool VerifyPacket(flatbuffers::Verifier &verifier, const void *obj, Packet type) {
+inline bool VerifyPacket(::flatbuffers::Verifier &verifier, const void *obj, Packet type) {
   switch (type) {
     case Packet_NONE: {
       return true;
@@ -766,10 +773,10 @@ inline bool VerifyPacket(flatbuffers::Verifier &verifier, const void *obj, Packe
   }
 }
 
-inline bool VerifyPacketVector(flatbuffers::Verifier &verifier, const flatbuffers::Vector<flatbuffers::Offset<void>> *values, const flatbuffers::Vector<uint8_t> *types) {
+inline bool VerifyPacketVector(::flatbuffers::Verifier &verifier, const ::flatbuffers::Vector<::flatbuffers::Offset<void>> *values, const ::flatbuffers::Vector<uint8_t> *types) {
   if (!values || !types) return !values && !types;
   if (values->size() != types->size()) return false;
-  for (flatbuffers::uoffset_t i = 0; i < values->size(); ++i) {
+  for (::flatbuffers::uoffset_t i = 0; i < values->size(); ++i) {
     if (!VerifyPacket(
         verifier,  values->Get(i), types->GetEnum<Packet>(i))) {
       return false;
@@ -779,32 +786,32 @@ inline bool VerifyPacketVector(flatbuffers::Verifier &verifier, const flatbuffer
 }
 
 inline const fbs::Root *GetRoot(const void *buf) {
-  return flatbuffers::GetRoot<fbs::Root>(buf);
+  return ::flatbuffers::GetRoot<fbs::Root>(buf);
 }
 
 inline const fbs::Root *GetSizePrefixedRoot(const void *buf) {
-  return flatbuffers::GetSizePrefixedRoot<fbs::Root>(buf);
+  return ::flatbuffers::GetSizePrefixedRoot<fbs::Root>(buf);
 }
 
 inline bool VerifyRootBuffer(
-    flatbuffers::Verifier &verifier) {
+    ::flatbuffers::Verifier &verifier) {
   return verifier.VerifyBuffer<fbs::Root>(nullptr);
 }
 
 inline bool VerifySizePrefixedRootBuffer(
-    flatbuffers::Verifier &verifier) {
+    ::flatbuffers::Verifier &verifier) {
   return verifier.VerifySizePrefixedBuffer<fbs::Root>(nullptr);
 }
 
 inline void FinishRootBuffer(
-    flatbuffers::FlatBufferBuilder &fbb,
-    flatbuffers::Offset<fbs::Root> root) {
+    ::flatbuffers::FlatBufferBuilder &fbb,
+    ::flatbuffers::Offset<fbs::Root> root) {
   fbb.Finish(root);
 }
 
 inline void FinishSizePrefixedRootBuffer(
-    flatbuffers::FlatBufferBuilder &fbb,
-    flatbuffers::Offset<fbs::Root> root) {
+    ::flatbuffers::FlatBufferBuilder &fbb,
+    ::flatbuffers::Offset<fbs::Root> root) {
   fbb.FinishSizePrefixed(root);
 }
 

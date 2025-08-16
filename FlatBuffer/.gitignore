@@ -50,3 +50,6 @@ Server/packages.config
 
 ConsoleClient/x64/
 ConsoleClient/packages.config
+
+MFCServer/x64/
+MFCServer/packages.config

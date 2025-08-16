@@ -1,9 +1,10 @@
-#include "stdafx.h"
+#include "pch.h"
 #include "Session.h"
 #include "ChatServer.h"
 
 CChatServer::CChatServer(const unsigned short PORT_NUMBER)
     : m_Acceptor(m_IoContext, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), PORT_NUMBER))
+	, async_work(boost::asio::make_work_guard(m_IoContext.get_executor()))
 {
 }
 
@@ -14,7 +15,6 @@ CChatServer::~CChatServer()
 
 void CChatServer::Start()
 {
-    async_work.reset(new boost::asio::io_context::work(m_IoContext));
     async_thread.create_thread(boost::bind(&boost::asio::io_context::run, &m_IoContext));
 
     std::cout << "서버 시작... (Port : " << m_Acceptor.local_endpoint().port() << ")" << std::endl;
