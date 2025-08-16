@@ -53,3 +53,6 @@ ConsoleClient/packages.config
 
 MFCServer/x64/
 MFCServer/packages.config
+
+MFCClient/x64/
+MFCClient/packages.config
