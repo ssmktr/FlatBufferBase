@@ -72,11 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Binary\MFC\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)Libs\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Libs\include\;$(SolutionDir)Libs\boost\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libs\boost\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Binary\MFC\$(Configuration)\</OutDir>
-    <IncludePath>$(SolutionDir)Libs\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Libs\include\;$(SolutionDir)Libs\boost\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libs\boost\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
