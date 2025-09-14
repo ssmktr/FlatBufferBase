@@ -13,6 +13,6 @@ public class ServerManager
 
     public void Run()
     {
-        Console.WriteLine("");
+        Console.WriteLine("Cleint Start!");
     }
 }
